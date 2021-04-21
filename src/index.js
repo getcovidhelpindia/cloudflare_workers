@@ -1,5 +1,7 @@
 import addEntry from './kv/add_entry'
 import getEntries from './kv/get_entries'
+import Sha256 from './util/sha';
+
 
 addEventListener('fetch', function(event) {
     const { request } = event
@@ -13,10 +15,22 @@ async function handleRequest(request) {
 
     switch (pathname) {
         case '/':
+            break
         case '/addData':
             return addEntry(request)
         case '/getData':
             return getEntries(request)
+        case '/getHash':
+            return new Response(JSON.stringify({
+                "data": Sha256.hash("works", { msgFormat: 'string', outFormat: 'string' }),
+                "success": "true"
+            }), {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-store',
+                }
+            })
     }
     // Workers on these hostnames have no origin server,
     // therefore there is nothing else to be found

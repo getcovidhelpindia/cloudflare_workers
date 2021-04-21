@@ -4,7 +4,8 @@ import validQuery from '../util/valid_query'
 
 const getEntries = async(request) => {
     const headers = Object.fromEntries([...request.headers])
-    const body = JSON.parse(await request.text())
+    const body = JSON.parse(await request.text()) //JSON.parse(await request.text())
+        // type = 0 => oxygen
         // type = 1 => medicine
         // type = 2 => plasma
         // type = 3 => bed
@@ -13,6 +14,9 @@ const getEntries = async(request) => {
         return invalid()
     let values
     switch (body['type']) {
+        case '0':
+            values = await fetchKvMultiple(OXYGEN, body['prefix'])
+            break
         case '1':
             values = await fetchKvMultiple(MEDICINE, body['prefix'])
             break
@@ -29,7 +33,10 @@ const getEntries = async(request) => {
             return invalid()
     }
 
-    return new Response(JSON.stringify(values), {
+    return new Response(JSON.stringify({
+        "success": "true",
+        "data": values
+    }), {
         status: 200,
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',

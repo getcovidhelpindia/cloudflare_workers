@@ -6,15 +6,21 @@ import invalid from '../util/responses'
 const addEntry = async(request) => {
     const headers = Object.fromEntries([...request.headers])
     const body = JSON.parse(await request.text())
-    const data = JSON.stringify(body)
     if (!validEntry(body))
         return invalid()
+
     const key = (body['state'] + "_" + body['district'] + "_" + uid(16)).toLowerCase()
-        // id = 1 => medicine
-        // id = 2 => plasma
-        // id = 3 => bed
-        // id = 4 => testing
+    body['key'] = key
+    const data = JSON.stringify(body)
+        // type = 0 => oxygen
+        // type = 1 => medicine
+        // type = 2 => plasma
+        // type = 3 => bed
+        // type = 4 => testing
     switch (body['type']) {
+        case '0':
+            await pushKV(OXYGEN, key, data)
+            break
         case '1':
             await pushKV(MEDICINE, key, data)
             break
@@ -28,11 +34,14 @@ const addEntry = async(request) => {
             await pushKV(TESTING, key, data)
             break
         default:
-            invalid()
+            return invalid()
 
     }
 
-    return new Response(key + ' was successfully added', {
+    return new Response(JSON.stringify({
+        "success": "true",
+        "data": key + ' was successfully added' //
+    }), {
         status: 200,
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',

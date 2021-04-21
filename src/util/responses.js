@@ -1,4 +1,7 @@
-const invalid = () => new Response("Invalid", {
+const invalid = () => new Response(JSON.stringify({
+    "success": "false",
+    "data": "Invalid"
+}), {
     status: 200,
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',
