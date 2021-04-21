@@ -41,6 +41,7 @@ const getEntries = async(request) => {
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
             'Cache-Control': 'no-store',
+            'Access-Control-Allow-Origin': "*",
         }
     })
 }

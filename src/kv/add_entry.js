@@ -8,6 +8,7 @@ const addEntry = async(request) => {
     const body = JSON.parse(await request.text())
     if (!validEntry(body))
         return invalid()
+    console.log(validEntry(body))
 
     const key = (body['state'] + "_" + body['district'] + "_" + uid(16)).toLowerCase()
     body['key'] = key
@@ -46,6 +47,7 @@ const addEntry = async(request) => {
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
             'Cache-Control': 'no-store',
+            'Access-Control-Allow-Origin': "*",
         }
     })
 }
