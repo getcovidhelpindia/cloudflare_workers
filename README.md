@@ -1,8 +1,6 @@
-# 👷 `worker-template` Hello World
+# 👷 `Cloudflare Workers` 
 
-A template for kick starting a Cloudflare worker project.
-
-[`index.js`](https://github.com/cloudflare/worker-template/blob/master/index.js) is the content of the Workers script.
+This project requires a `wrangler.toml` file containing all the credentials.
 
 #### Wrangler
 
