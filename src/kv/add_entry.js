@@ -1,10 +1,14 @@
 import pushKV from '../util/push_kv'
 import uid from '../util/uid'
+import validEntry from '../util/valid_entry'
+import invalid from '../util/responses'
 
 const addEntry = async(request) => {
     const headers = Object.fromEntries([...request.headers])
     const body = JSON.parse(await request.text())
     const data = JSON.stringify(body)
+    if (!validEntry(body))
+        return invalid()
     const key = (body['state'] + "_" + body['district'] + "_" + uid(16)).toLowerCase()
         // id = 1 => medicine
         // id = 2 => plasma
@@ -24,13 +28,7 @@ const addEntry = async(request) => {
             await pushKV(TESTING, key, data)
             break
         default:
-            return new Response("Invalid id", {
-                status: 200,
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Cache-Control': 'no-store',
-                }
-            })
+            invalid()
 
     }
 

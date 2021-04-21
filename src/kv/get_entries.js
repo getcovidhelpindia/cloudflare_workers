@@ -1,4 +1,6 @@
 import fetchKvMultiple from '../util/fetch_kv_multiple'
+import invalid from '../util/responses'
+import validQuery from '../util/valid_query'
 
 const getEntries = async(request) => {
     const headers = Object.fromEntries([...request.headers])
@@ -7,6 +9,8 @@ const getEntries = async(request) => {
         // type = 2 => plasma
         // type = 3 => bed
         // type = 4 => testing
+    if (!validQuery(body))
+        return invalid()
     let values
     switch (body['type']) {
         case '1':
@@ -22,13 +26,7 @@ const getEntries = async(request) => {
             values = await fetchKvMultiple(TESTING, body['prefix'])
             break
         default:
-            return new Response("Invalid query", {
-                status: 200,
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Cache-Control': 'no-store',
-                }
-            })
+            return invalid()
     }
 
     return new Response(JSON.stringify(values), {
