@@ -1,4 +1,5 @@
 import addEntry from './kv/add_entry'
+import getEntries from './kv/get_entries'
 
 addEventListener('fetch', function(event) {
     const { request } = event
@@ -14,8 +15,8 @@ async function handleRequest(request) {
         case '/':
         case '/addData':
             return addEntry(request)
-                // case '/getData':
-                //     return getData(request)
+        case '/getData':
+            return getEntries(request)
     }
     // Workers on these hostnames have no origin server,
     // therefore there is nothing else to be found
