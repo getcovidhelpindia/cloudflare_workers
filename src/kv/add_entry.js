@@ -12,6 +12,10 @@ const addEntry = async(request) => {
 
     const key = (body['state'] + "_" + body['district'] + "_" + uid(16)).toLowerCase()
     body['key'] = key
+    body['isApproved'] = false
+    body['verifiedAt'] = ""
+    body['createdAt'] = new Date()
+    body['isHidden'] = true
     const data = JSON.stringify(body)
         // type = 0 => oxygen
         // type = 1 => medicine
@@ -19,19 +23,19 @@ const addEntry = async(request) => {
         // type = 3 => bed
         // type = 4 => testing
     switch (body['type']) {
-        case '0':
+        case 0:
             await pushKV(OXYGEN, key, data)
             break
-        case '1':
+        case 1:
             await pushKV(MEDICINE, key, data)
             break
-        case '2':
+        case 2:
             await pushKV(PLASMA, key, data)
             break
-        case '3':
+        case 3:
             await pushKV(BED, key, data)
             break
-        case '4':
+        case 4:
             await pushKV(TESTING, key, data)
             break
         default:
@@ -40,7 +44,7 @@ const addEntry = async(request) => {
     }
 
     return new Response(JSON.stringify({
-        "success": "true",
+        "success": true,
         "data": key + ' was successfully added' //
     }), {
         status: 200,

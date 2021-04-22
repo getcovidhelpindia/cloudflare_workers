@@ -14,19 +14,19 @@ const getEntries = async(request) => {
         return invalid()
     let values
     switch (body['type']) {
-        case '0':
+        case 0:
             values = await fetchKvMultiple(OXYGEN, body['prefix'])
             break
-        case '1':
+        case 1:
             values = await fetchKvMultiple(MEDICINE, body['prefix'])
             break
-        case '2':
+        case 2:
             values = await fetchKvMultiple(PLASMA, body['prefix'])
             break
-        case '3':
+        case 3:
             values = await fetchKvMultiple(BED, body['prefix'])
             break
-        case '4':
+        case 4:
             values = await fetchKvMultiple(TESTING, body['prefix'])
             break
         default:
@@ -34,7 +34,7 @@ const getEntries = async(request) => {
     }
 
     return new Response(JSON.stringify({
-        "success": "true",
+        "success": true,
         "data": values
     }), {
         status: 200,

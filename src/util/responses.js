@@ -1,5 +1,5 @@
 const invalid = () => new Response(JSON.stringify({
-    "success": "false",
+    "success": false,
     "data": "Invalid"
 }), {
     status: 200,
