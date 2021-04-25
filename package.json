@@ -2,7 +2,7 @@
     "private": true,
     "name": "cloudflare_workers",
     "version": "1.0.0",
-    "description": "A template for kick starting a Cloudflare Workers project",
+    "description": "Backend for getcovidhelp",
     "main": "./src/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,5 +13,8 @@
     "devDependencies": {
         "prettier": "^1.18.2"
     },
-    "dependencies": {}
+    "dependencies": {
+        "crypto-random-string": "^4.0.0",
+        "node-fetch": "^2.6.1"
+    }
 }

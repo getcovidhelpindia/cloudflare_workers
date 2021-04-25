@@ -1,3 +1,7 @@
+/**
+ * Standard response for an invalid API Call
+ * @returns {Response}  - Hardcoded message indicating a failed API request
+ */
 const invalid = () => new Response(JSON.stringify({
     "success": false,
     "data": "Invalid"
