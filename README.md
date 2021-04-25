@@ -14,7 +14,7 @@
 
 ---
 
-<p align="center"> The backend for [getcovidhelp.in](getcovidhelp.in)
+<p align="center"> The backend for getcovidhelp.in
     <br> 
 </p>
 
