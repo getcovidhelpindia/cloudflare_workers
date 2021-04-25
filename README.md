@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://github.com/getcovidhelpindia/react/blob/main/public/logo_64.png?raw=true" alt="Project logo"></a>
+ <img width=200px height=200px src="https://github.com/getcovidhelpindia/react/blob/main/public/logo_512.png?raw=true" alt="Project logo"></a>
 </p>
 
 <h3 align="center">cloudflare_workers</h3>
